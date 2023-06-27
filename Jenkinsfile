@@ -4,7 +4,7 @@ pipeline {
     stage('Build Java Code') {
       steps {
         echo "${BUILD_NUMBER}"
-        sh 'bash build.sh'
+        sh 'rm -f *.war && bash build.sh && mv ROOT.war ROOT${BUILD_NUMBER}.war'
       }
     }
   }
