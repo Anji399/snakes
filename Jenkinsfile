@@ -24,13 +24,14 @@ pipeline {
           }  
        }    
     }
-    stage('push docker image') {
-      steps {
-        script {
-          docker.withRegistry('',registryCredential)
-          dockerImage.push()
-        }   
-      }
+    stage('Push docker image') {
+        steps {
+            script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                }
+            }    
+        }    
     }
   } 
 }  
