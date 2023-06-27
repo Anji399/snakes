@@ -1,10 +1,10 @@
 pipeline {
   agent any
-    environment {
-      registry = 'mvpar/devops20'
-      registryCredential = 'dockerhub_id'
-      dockerimage = ''
-    }    
+  environment {
+    registry = 'mvpar/devops20'
+    registryCredential = 'dockerhub_id'
+    dockerImage = ''
+  }    
   stages {
     stage('Build Java Code') {
       steps {
