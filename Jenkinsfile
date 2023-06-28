@@ -4,6 +4,7 @@ pipeline {
     registry = 'mvpar/devops20'
     registryCredential = 'dockerhub_id'
     dockerImage = ''
+    PACKER_BUILD = 'NO'
   }    
   stages {
     stage('Build Java Code') {
@@ -34,6 +35,11 @@ pipeline {
         }    
     }
     stage('perform packer build') {
+      when {
+          expression {
+              env.PACKER_BUILD == 'YES' 
+          }
+      }
       steps {
         sh 'packer build -var-file packer-vars.json packer.json | tee output.txt'
         sh "tail -2 output.txt | head -2 | awk 'match(\$0, /ami-.*/) { print substr(\$0, RSTART, RLENGTH) }' > ami.txt"
@@ -43,6 +49,22 @@ pipeline {
             sh "echo variable \\\"imagename\\\" { default = \\\"$AMIID\\\" } >> variables.tf"
         }
       }
+    }
+    stage('Use Default Packer Image') {
+        when {
+            expression {
+                env.PACKER_BUILD == 'NO' 
+            }
+        }    
+        steps {
+            dir('terraform') {
+            script {
+                def AMIID = 'ami-03bef618b5b4b5846'
+                sh "echo variable \\\"imagename\\\" { default = \\\"$AMIID\\\" } >> variables.tf"
+                sh 'cat variables.tf | grep -i imagename'
+            }
+            }
+        }
     }
   }
 } 
