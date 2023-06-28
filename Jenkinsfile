@@ -70,7 +70,6 @@ pipeline {
         steps {
             dir('terraform') {
                 sh 'terraform init'
-                sh 'terraform taint null_resource.docker_deploy'
                 sh 'terraform apply --auto-approve'
             }
         }
