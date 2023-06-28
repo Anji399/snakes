@@ -33,5 +33,12 @@ pipeline {
             }    
         }    
     }
-  } 
+    stage('check version') {
+      steps {
+        sh 'terraform version'
+        sh 'packer version'
+      }  
+    } 
+  }
 }  
+  
