@@ -1,6 +1,6 @@
  resource "aws_instance" "web-1" {
      ami = var.imagename
-     availability_zone = "ap-south-1a"
+     availability_zone = "us-east-1a"
      instance_type = "t2.micro"
      key_name = "feb"
      subnet_id = "${aws_subnet.my-pub-1.id}"

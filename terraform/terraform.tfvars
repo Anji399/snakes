@@ -1,6 +1,6 @@
-aws_region = "ap-south-1"
+aws_region = "us-east-1"
 instance_type = "t2.micro"
-azs = "ap-south-1a"
+azs = "us-east-1a"
 vpc_cidr = "10.0.0.0/16"
 public_subnet1_cidr = "10.0.1.0/24"
 vpc_name = "my-vpc"

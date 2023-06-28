@@ -3,15 +3,7 @@ provider "aws" {
     region = "${var.aws_region}"
 }
 
-terraform {
-  required_version = "<= 1.3.14" #Forcing which version of Terraform needs to be used
-  required_providers {
-    aws = {
-      version = "<= 5.0.0" #Forcing which version of plugin needs to be used.
-      source = "hashicorp/aws"
-    }
-  }
-}
+
 
 resource "aws_vpc" "default" {
     cidr_block = "${var.vpc_cidr}"
@@ -108,7 +100,7 @@ resource "aws_security_group" "allow_all" {
 #     #ami = "${data.aws_ami.my_ami.id}"
 #     availability_zone = "us-east-1a"
 #     instance_type = "t2.micro"
-#     key_name = "LaptopKey"
+#     key_name = "new"
 #     subnet_id = "${aws_subnet.subnet1-public.id}"
 #     vpc_security_group_ids = ["${aws_security_group.allow_all.id}"]
 #     associate_public_ip_address = true	
