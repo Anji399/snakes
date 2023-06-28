@@ -3,6 +3,23 @@ provider "aws" {
     region = "${var.aws_region}"
 }
 
+terraform {
+  required_version = "<= 2.0.14" #Forcing which version of Terraform needs to be used
+  required_providers {
+    aws = {
+      version = "<= 4.0.0" #Forcing which version of plugin needs to be used.
+      source = "hashicorp/aws"
+    }
+  }
+}
+resource "aws_s3_bucket" "terra_mpr" {
+   bucket = "terraform-mpr-devops"
+} 
+resource "aws_s3_object" "alien" {
+   bucket = aws_s3_bucket.terra_mpr.id
+   key = "press.tfstate/"
+}
+
 resource "aws_vpc" "default" {
     cidr_block = "${var.vpc_cidr}"
     enable_dns_hostnames = true
